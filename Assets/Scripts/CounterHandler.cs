@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 using System.Collections;
 
 public class CounterHandler : MonoBehaviour
 {
-	[SerializeField] private float _delay = 0.5f;
+	private const float Delay = 0.5f;
 
 	private Counter _counter;
 	private Coroutine _countCoroutine;
@@ -13,7 +12,7 @@ public class CounterHandler : MonoBehaviour
 	private void Awake()
 	{
 		_counter = GetComponent<Counter>();
-		_waitForSeconds = new WaitForSeconds(_delay);
+		_waitForSeconds = new WaitForSeconds(Delay);
 	}
 
 	private void Start() =>
