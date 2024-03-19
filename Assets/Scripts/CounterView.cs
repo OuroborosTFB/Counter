@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -8,23 +9,18 @@ public class CounterView : MonoBehaviour
 	
 	private TextMeshProUGUI _counterText;
 
+	private void OnEnable() =>
+		_counter.ValueChanged += UpdateCounterText;
+
+	private void OnDisable() =>
+		_counter.ValueChanged -= UpdateCounterText;
+
 	private void Awake() =>
 		_counterText = GetComponent<TextMeshProUGUI>();
 
-	private void Update()
-	{
-		SetCounterValue();
-	}
+	private void Start() =>
+		UpdateCounterText();
 
-	private void SetCounterValue()
-	{
-		if (_counterText != null && _counter != null)
-		{
-			_counterText.text = _counter.Value.ToString(CultureInfo.CurrentCulture);
-		}
-		else
-		{
-			Debug.LogError("Counter or TextMeshProUGUI reference is missing.");
-		}
-	}
+	private void UpdateCounterText() =>
+		_counterText.text = _counter.Value.ToString(CultureInfo.CurrentCulture);
 }
